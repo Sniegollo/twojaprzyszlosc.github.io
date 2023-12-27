@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karty przepowiadania przyszłości</title>
+    <style>
+
+	body {
+	    background-color: red;
+	    color: black;
+	}
+   </style>
+</head>
+<body>
+    <h1>Witamy w generatorze kart do wróżenia przyszłości!</h1>
+    <h2>Po wygenerowaaniu kart nalerzy kliknąć przycisk resetuj by módz wygenerować jeszcze raz</h2>
+    <div id="cardContainer">
+        <!-- Cards will go here -->
+    </div>
+    <button onclick="generateCards()">Wygeneruj karty</button>
+
+    <script>
+        var allCards = ["Szczęście", "Miłość", "Pieniądze", "Koniec", "Początek"];
+        var chosenCards = [];
+
+        function getRandomCard() {
+            var randomIndex = Math.floor(Math.random() * allCards.length);
+            return allCards.splice(randomIndex, 1)[0];
+        }
+
+        function generateCards() {
+            var cardContainer = document.getElementById("cardContainer");
+
+            // Clear previous cards
+            cardContainer.innerHTML = "";
+
+            // Ensure there are enough cards to choose from
+            if (allCards.length >= 3) {
+                for (var i = 0; i < 3; i++) {
+                    var chosenCard = getRandomCard();
+
+                    chosenCards.push(chosenCard); // Add the chosen card to the chosenCards array
+
+                    // Create a new card element
+                    var cardElement = document.createElement("div");
+                    cardElement.textContent = chosenCard;
+
+                    // Append the card to the container
+                    cardContainer.appendChild(cardElement);
+                }
+            } else {
+                alert("Za mało kart do wygenerowania. Proszę zresetować.");
+            }
+        }
+
+        function resetCards() {
+            allCards = ["Szczęście", "Miłość", "Pieniądze", "Koniec", "Początek"];
+            chosenCards = [];
+        }
+    </script>
+    <button onclick="resetCards()">Zresetuj</button>
+</body>
+</html>
+
+
